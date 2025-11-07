@@ -6,7 +6,7 @@ import (
 	"os/exec"
 )
 
-func GetStagedDiff() (string, error) {
+func GetStagedDiff() (*string, error) {
 	cmd := exec.Command("git", "diff", "--staged")
 
 	var out bytes.Buffer
@@ -16,8 +16,12 @@ func GetStagedDiff() (string, error) {
 
 	err := cmd.Run()
 	if err != nil {
-		return "", fmt.Errorf("git diff --staged failed: %v (%s)", err, stderr.String())
+		// errMsg := fmt.Sprintf("git diff --staged failed: %v (%s)", err, stderr.String())
+
+		return nil, fmt.Errorf("git diff --staged failed: %v (%s)", err, stderr.String())
 	}
 
-	return out.String(), nil
+	outString := out.String()
+
+	return &outString, nil
 }
