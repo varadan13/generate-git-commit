@@ -111,7 +111,7 @@ func StreamContent() {
 
 	contents := []*genai.Content{
 		{
-			Role: "system",
+			Role: "user",
 			Parts: []*genai.Part{
 				{Text: systemprompt},
 			},
